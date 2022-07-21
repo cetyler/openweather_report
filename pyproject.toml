@@ -1,10 +1,10 @@
 [tool.poetry]
 name = "openweather_report"
-version = "0.1.2"
+version = "0.1.4"
 description = "Get weather data using OpenWeather API and save data to a database."
 authors = ["Christopher Tyler <christophertyler@engineer.com>"]
 license = "MIT"
-readme = "README.md"
+readme = "README.rst"
 repository = "https://github.com/cetyler/openweather_report"
 
 [tool.poetry.dependencies]
