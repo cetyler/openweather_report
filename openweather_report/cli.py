@@ -8,9 +8,9 @@ from pathlib import Path
 
 API_TYPES = [
     "one_call",
-    "current",
-    "forecast",
-    "historical",
+    # "current",
+    # "forecast",
+    # "historical",
 ]
 
 SAVE_TYPES = [
@@ -81,7 +81,7 @@ def main(
 
     weather_types = {
         # "current": weather_data.by_current(),
-        "one_call": weather_data.by_one_call(),
+        "one_call": weather_data.by_one_call(),  # type: ignore
         # "forecast": weather_data.by_forecast(),
         # "historical": weather_data.by_history(weather_data),
     }
@@ -93,11 +93,11 @@ def main(
         with open(Path(save_path), "w") as file:
             file.write(weather_data.raw_data)
     elif save == "postgresql":
-        from .postgres import DatabaseData
+        from .postgres import DatabaseData  # type: ignore
 
         save_db = True
     elif save == "sqlite":
-        from .sqlite import DatabaseData
+        from .sqlite import DatabaseData  # type: ignore
 
         save_db = True
 

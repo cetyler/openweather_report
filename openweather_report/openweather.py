@@ -25,7 +25,7 @@ class OpenWeatherMap:
     exclude: str = "NA"
     units: str = "imperial"
     language: str = "en"
-    raw_data: json = json
+    raw_data: str = "NA"
 
     def api_version(self, version: str) -> str:
         """API version links."""
@@ -34,7 +34,8 @@ class OpenWeatherMap:
             "2.5": "http://api.openweathermap.org/data/2.5/",
             "3.0": "http://api.openweathermap.org/data/3.0/",
         }
-        return api_links.get(version)
+        api_link = api_links.get(version, "Invalid")
+        return api_link
 
     def api_call(self, api_link: str) -> None:
         """Send API request."""

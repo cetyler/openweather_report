@@ -23,7 +23,7 @@ class DatabaseData:
     connection_string: str
     entry_date: datetime
     api_call: str
-    raw_data: json
+    raw_data: str
     software_version: str
     query_file: str
     module_name: str
@@ -45,7 +45,7 @@ class DatabaseData:
         module_path = Path(sys.modules[self.module_name].__path__[0])
         return aiosql.from_path(module_path / self.query_file, "psycopg2")
 
-    def save_json(self):
+    def save_json(self) -> None:
         conn = self.create_connection()
         conn.autocommit = True
         queries = self.load_queries()
