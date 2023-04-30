@@ -55,6 +55,12 @@ SAVE_TYPES = [
     type=str,
     default=f"{datetime.today().strftime('%y%m%d-%H%M')}_data.json",
 )
+@click.option(
+    "--db_string",
+    type=str,
+    default="NA",
+    help="Connection string to save to database.",
+)
 @click.version_option(__version__)
 def main(
     api_type: str,
@@ -64,6 +70,7 @@ def main(
     weather_date: datetime,
     save: str,
     save_path: str,
+    db_string: str,
 ) -> int:
     """Take user inputs and save to either file or database."""
 
@@ -80,10 +87,30 @@ def main(
 
     weather_types.get(api_type)
 
+    save_db = False
     if save == "json":
         with open(Path(save_path), "w") as file:
             file.write(weather_data.raw_data)
     elif save == "postgresql":
+        from .postgres import DatabaseData
+
+        save_db = True
+    elif save == "sqlite":
+        # from .sqlite import DatabaseData
         pass
+
+    if save_db:
+        db = DatabaseData(
+            connection_string=db_string,
+            entry_date=datetime.today(),
+            api_call=api_type,
+            raw_data=weather_data.raw_data,
+            software_version=__version__,
+            application_name="openweather_report",
+            query_file="openweather.sql",
+            module_name="openweather_report",
+        )
+
+        db.save_json()
 
     return 0
