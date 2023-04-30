@@ -16,6 +16,7 @@ API_TYPES = [
 SAVE_TYPES = [
     "json",
     "postgresql",
+    "sqlite",
 ]
 
 
@@ -96,8 +97,9 @@ def main(
 
         save_db = True
     elif save == "sqlite":
-        # from .sqlite import DatabaseData
-        pass
+        from .sqlite import DatabaseData
+
+        save_db = True
 
     if save_db:
         db = DatabaseData(
