@@ -27,4 +27,4 @@ jobs:
       - name: Install dependencies
         run: uv sync --all-extras --dev
       - name: Run Pytest
-        run: uvx pytest tests
+        run: pytest tests
