@@ -17,6 +17,7 @@ SAVE_TYPES = [
     "json",
     "postgresql",
     "sqlite",
+    "duckdb",
 ]
 
 
@@ -98,6 +99,10 @@ def main(
         save_db = True
     elif save == "sqlite":
         from .sqlite import DatabaseData  # type: ignore
+
+        save_db = True
+    elif save == "duckdb":
+        from .duckdb import DatabaseData # type: ignore
 
         save_db = True
 
