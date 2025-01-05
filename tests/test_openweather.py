@@ -1,4 +1,5 @@
 import pytest
+
 from openweather_report.openweather import OpenWeatherMap
 
 
