@@ -5,14 +5,15 @@ SQLite Module
 This module is to read and write to SQLite.
 """
 
-import sys
-from dataclasses import dataclass, field
-from typing import Any
-import aiosql
-from pathlib import Path
-from datetime import datetime
 import json
 import sqlite3
+import sys
+from dataclasses import dataclass, field
+from datetime import datetime
+from pathlib import Path
+from typing import Any
+
+import aiosql
 
 
 @dataclass
@@ -34,7 +35,7 @@ class DatabaseData:
             connection = sqlite3.connect(
                 f"{self.connection_string}",
             )
-            print(f"Connection to SQLite DB successful")
+            print("Connection to SQLite DB successful")
         except Exception as e:
             print(f"Error {e} occurred.")
 

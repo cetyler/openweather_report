@@ -6,10 +6,11 @@ This module have classes and functions to interact with the Open Weather Map
 API.
 """
 
-import requests
-from dataclasses import dataclass
-from typing import Dict, Any
 import json
+from dataclasses import dataclass
+from typing import Any, Dict
+
+import requests
 
 
 @dataclass

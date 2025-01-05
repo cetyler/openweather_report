@@ -1,8 +1,8 @@
 """
-PostgreSQL Module
------------------
+DuckDB Module
+-------------
 
-This module is to read and write to PostgreSQL.
+This module is to read and write to DuckDB.
 """
 
 import json
@@ -13,13 +13,12 @@ from pathlib import Path
 from typing import Any
 
 import aiosql
-import psycopg2
-from psycopg2 import OperationalError
+import duckdb
 
 
 @dataclass
 class DatabaseData:
-    """To load and save data to PostgreSQL."""
+    """To load and save data to sqlite."""
 
     connection_string: str
     entry_date: datetime
@@ -33,10 +32,10 @@ class DatabaseData:
     def create_connection(self):
         connection = None
         try:
-            connection = psycopg2.connect(
-                f"{self.connection_string}?application_name={self.application_name}",
+            connection = duckdb.connect(
+                f"{self.connection_string}",
             )
-            print("Connection to PostgreSQL DB successful")
+            print("Connection to DuckDB successful")
         except Exception as e:
             print(f"Error {e} occurred.")
 
@@ -44,19 +43,21 @@ class DatabaseData:
 
     def load_queries(self):
         module_path = Path(sys.modules[self.module_name].__path__[0])
-        return aiosql.from_path(module_path / self.query_file, "psycopg2")
+        return aiosql.from_path(module_path / self.query_file, "duckdb")
 
     def save_json(self) -> None:
         conn = self.create_connection()
-        conn.autocommit = True
         queries = self.load_queries()
         try:
-            queries.save_json_data(
+            queries.save_json_data_no_schema(
                 conn,
                 entry_date=self.entry_date,
                 api_call=self.api_call,
                 raw_data=self.raw_data,
                 software_version=self.software_version,
             )
+            print("Data saved.")
+            conn.commit()
+            conn.close()
         except Exception as e:
             print(f"Error {e} occurred.")
