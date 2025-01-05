@@ -1,10 +1,12 @@
 """Console script to get data from OpenWeatherMap."""
 
-from .__init__ import __version__
-import click
-from .openweather import OpenWeatherMap
-from datetime import datetime, timedelta, date
+from datetime import date, datetime, timedelta
 from pathlib import Path
+
+import click
+
+from .__init__ import __version__
+from .openweather import OpenWeatherMap
 
 API_TYPES = [
     "one_call",
@@ -102,7 +104,7 @@ def main(
 
         save_db = True
     elif save == "duckdb":
-        from .duckdb import DatabaseData # type: ignore
+        from .duckdb import DatabaseData  # type: ignore
 
         save_db = True
 

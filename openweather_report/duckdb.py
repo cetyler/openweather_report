@@ -5,13 +5,14 @@ DuckDB Module
 This module is to read and write to DuckDB.
 """
 
+import json
 import sys
 from dataclasses import dataclass, field
-from typing import Any
-import aiosql
-from pathlib import Path
 from datetime import datetime
-import json
+from pathlib import Path
+from typing import Any
+
+import aiosql
 import duckdb
 
 
@@ -31,10 +32,10 @@ class DatabaseData:
     def create_connection(self):
         connection = None
         try:
-            connection = sqlite3.connect(
+            connection = duckdb.connect(
                 f"{self.connection_string}",
             )
-            print(f"Connection to DuckDB successful")
+            print("Connection to DuckDB successful")
         except Exception as e:
             print(f"Error {e} occurred.")
 

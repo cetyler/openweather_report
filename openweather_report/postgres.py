@@ -5,15 +5,16 @@ PostgreSQL Module
 This module is to read and write to PostgreSQL.
 """
 
+import json
 import sys
+from dataclasses import dataclass, field
+from datetime import datetime
+from pathlib import Path
+from typing import Any
+
+import aiosql
 import psycopg2
 from psycopg2 import OperationalError
-from dataclasses import dataclass, field
-from typing import Any
-import aiosql
-from pathlib import Path
-from datetime import datetime
-import json
 
 
 @dataclass
@@ -35,7 +36,7 @@ class DatabaseData:
             connection = psycopg2.connect(
                 f"{self.connection_string}?application_name={self.application_name}",
             )
-            print(f"Connection to PostgreSQL DB successful")
+            print("Connection to PostgreSQL DB successful")
         except Exception as e:
             print(f"Error {e} occurred.")
 
