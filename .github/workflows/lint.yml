@@ -24,6 +24,6 @@ jobs:
       - name: Install dependencies
         run: uv sync --all-extras --dev
       - name: Run Ruff
-        run: ruff check openweathermap/ --output-format=github
+        run: uv ruff check openweathermap/ --output-format=github
       - name: Run mypy
-        run: mypy -m openweathermap --strict 
+        run: uv mypy -m openweathermap --strict 
