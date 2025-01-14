@@ -30,12 +30,13 @@ build-backend = "hatchling.build"
 dev-dependencies = [
     "coverage >=7.2",
     "mypy >=1.2",
-    "pre-commit >=3.2",
+    "pre-commit>=3.2",
     "pytest >=7.3",
     "pytest-cov >=4.0",
     "pytest-picked >=0.4",
     "pytest-randomly >=3.12",
     "ruff >=0.0.263",
+    "uv-secure>=0.5.0",
 ]
 
 [tool.uv.sources]
