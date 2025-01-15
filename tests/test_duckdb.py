@@ -1,8 +1,11 @@
-import pytest
-import duckdb
-from openweather_report.duckdb import DatabaseData
-from pathlib import Path
 from datetime import datetime
+from pathlib import Path
+
+import duckdb
+import pytest
+
+from openweather_report.duckdb import DatabaseData
+
 
 def test_create_connection(tmp_path):
     db_path = Path(tmp_path) / "test.duckdb"
@@ -21,6 +24,6 @@ def test_create_connection(tmp_path):
     con = duckdb.connect(db_path)
 
     tables = con.sql("show tables;")
-        
+
 
     assert len(tables.fetchall()) == 1

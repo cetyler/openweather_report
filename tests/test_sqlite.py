@@ -1,8 +1,11 @@
-import pytest
 import sqlite3
-from openweather_report.sqlite import DatabaseData
-from pathlib import Path
 from datetime import datetime
+from pathlib import Path
+
+import pytest
+
+from openweather_report.sqlite import DatabaseData
+
 
 def test_create_connection(tmp_path):
     db_path = Path(tmp_path) / "test.sqlite"
@@ -20,9 +23,5 @@ def test_create_connection(tmp_path):
 
     con = sqlite3.connect(db_path)
     cur = con.cursor()
-    tables = cur.execute("""select name 
-                              from sqlite_schema 
-                             where type = 'table'
-                               and name not like 'sqlite_%';
-                        """)
+    cur.execute("select name from sqlite_schema where type = 'table' and name not like 'sqlite_%';")
     assert len(cur.fetchall()) == 1
