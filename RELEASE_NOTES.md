@@ -1,7 +1,10 @@
 ## Overview
 
-Fix workflow for GitHub releases.
+Add ability to setup database (not enabled in CLI yet).
 
 ## Features
 
-- Fixed: Update permissions and will use `RELEASE_NOTES.md` to create release.
+- Added: `uv-secure` to check `uv.lock` for updates and vulnerabilities.
+- Added: `setup_database()` method to create table/schema.
+  - Tests for DuckDB and SQLite only for now.
+- 
