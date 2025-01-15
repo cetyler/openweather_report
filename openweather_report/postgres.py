@@ -60,3 +60,14 @@ class DatabaseData:
             )
         except Exception as e:
             print(f"Error {e} occurred.")
+
+    def setup_database(self) -> None:
+        conn = self.create_connection()
+        queries = self.load_queries()
+        try:
+            queries.create_weather_schema_postgresql(conn)
+            queries.create_raw_json_data_postgresql(conn)
+        except Exception as e:
+            print(f"Error {e} occurred.")
+        conn.commit()
+        conn.close()

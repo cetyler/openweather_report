@@ -61,3 +61,13 @@ class DatabaseData:
             conn.close()
         except Exception as e:
             print(f"Error {e} occurred.")
+
+    def setup_database(self) -> None:
+        conn = self.create_connection()
+        queries = self.load_queries()
+        try:
+            queries.create_raw_json_data_sqlite(conn)
+        except Exception as e:
+            print(f"Error {e} occurred.")
+        conn.commit()
+        conn.close()
